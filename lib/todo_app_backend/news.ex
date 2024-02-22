@@ -10,12 +10,6 @@ defmodule TodoAppBackend.News do
 
   @doc """
   Returns the list of tasks.
-
-  ## Examples
-
-      iex> list_tasks()
-      [%Task{}, ...]
-
   """
   def list_tasks do
     Repo.all(Task)
@@ -25,29 +19,11 @@ defmodule TodoAppBackend.News do
   Gets a single task.
 
   Raises `Ecto.NoResultsError` if the Task does not exist.
-
-  ## Examples
-
-      iex> get_task!(123)
-      %Task{}
-
-      iex> get_task!(456)
-      ** (Ecto.NoResultsError)
-
   """
   def get_task!(id), do: Repo.get!(Task, id)
 
   @doc """
   Creates a task.
-
-  ## Examples
-
-      iex> create_task(%{field: value})
-      {:ok, %Task{}}
-
-      iex> create_task(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def create_task(attrs \\ %{}) do
     %Task{}
@@ -57,25 +33,22 @@ defmodule TodoAppBackend.News do
 
   @doc """
   Updates a task.
-
-  ## Examples
-
-      iex> update_task(task, %{field: new_value})
-      {:ok, %Task{}}
-
-      iex> update_task(task, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
-  def update_task(%Task{} = task, attrs) do
-    task
-    |> Task.changeset(attrs)
-    |> Repo.update()
+  def update_task(%{id: id} = args) do
+    case Repo.get(Task, id) do
+      nil -> {:error, "Task not found"}
+      task ->
+        updated_task = task
+          |> Task.changeset(Map.drop(args, [:id]))
+          |> Repo.update()
+
+        {:ok, updated_task}
+    end
   end
 
   @doc """
   Deletes a task.
-
+  """
   def delete_task(%{id: id}) do
     case Repo.get(Task, id) do
       nil -> {:error, "Task not found"}
@@ -87,12 +60,6 @@ defmodule TodoAppBackend.News do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking task changes.
-
-  ## Examples
-
-      iex> change_task(task)
-      %Ecto.Changeset{data: %Task{}}
-
   """
   def change_task(%Task{} = task, attrs \\ %{}) do
     Task.changeset(task, attrs)

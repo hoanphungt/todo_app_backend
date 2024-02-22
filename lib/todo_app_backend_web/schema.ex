@@ -25,6 +25,15 @@ defmodule TodoAppBackendWeb.Schema do
       resolve &NewsResolver.create_task/3
     end
 
+    @desc "Update a task"
+    field :update_task, :task do
+      arg :id, non_null(:id)
+      arg :text, :string
+      arg :status, :boolean
+
+      resolve &NewsResolver.update_task/3
+    end
+
     @desc "Delete a task"
     field :delete_task, :task do
       arg :id, non_null(:id)
