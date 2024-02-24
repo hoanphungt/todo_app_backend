@@ -3,10 +3,13 @@ defmodule TodoAppBackendWeb.Schema do
 
   alias TodoAppBackendWeb.NewsResolver
 
+  import_types(Absinthe.Type.Custom)
+
   object :task do
     field :id, non_null(:id)
     field :text, non_null(:string)
     field :status, :boolean
+    field :due_date, :date
   end
 
   query do
@@ -21,6 +24,7 @@ defmodule TodoAppBackendWeb.Schema do
     field :create_task, :task do
       arg(:text, non_null(:string))
       arg(:status, :boolean)
+      arg(:due_date, :date)
 
       resolve(&NewsResolver.create_task/3)
     end
@@ -30,6 +34,7 @@ defmodule TodoAppBackendWeb.Schema do
       arg(:id, non_null(:id))
       arg(:text, :string)
       arg(:status, :boolean)
+      arg(:due_date, :date)
 
       resolve(&NewsResolver.update_task/3)
     end

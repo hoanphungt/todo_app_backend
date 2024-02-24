@@ -5,6 +5,7 @@ defmodule TodoAppBackend.News.Task do
   schema "tasks" do
     field :status, :boolean, default: false
     field :text, :string
+    field :due_date, :date
 
     timestamps(type: :utc_datetime)
   end
@@ -12,7 +13,7 @@ defmodule TodoAppBackend.News.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:text, :status])
+    |> cast(attrs, [:text, :status, :due_date])
     |> validate_required([:text, :status])
   end
 end
