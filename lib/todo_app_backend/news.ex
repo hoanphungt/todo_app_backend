@@ -40,12 +40,9 @@ defmodule TodoAppBackend.News do
         {:error, "Task not found"}
 
       task ->
-        updated_task =
-          task
-          |> Task.changeset(Map.drop(args, [:id]))
-          |> Repo.update()
-
-        {:ok, updated_task}
+        task
+        |> Task.changeset(args)
+        |> Repo.update()
     end
   end
 
@@ -59,7 +56,6 @@ defmodule TodoAppBackend.News do
 
       task ->
         Repo.delete(task)
-        {:ok, task}
     end
   end
 end
