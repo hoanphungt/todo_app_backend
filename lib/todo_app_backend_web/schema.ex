@@ -19,26 +19,26 @@ defmodule TodoAppBackendWeb.Schema do
   mutation do
     @desc "Create a new task"
     field :create_task, :task do
-      arg :text, non_null(:string)
-      arg :status, :boolean
+      arg(:text, non_null(:string))
+      arg(:status, :boolean)
 
-      resolve &NewsResolver.create_task/3
+      resolve(&NewsResolver.create_task/3)
     end
 
     @desc "Update a task"
     field :update_task, :task do
-      arg :id, non_null(:id)
-      arg :text, :string
-      arg :status, :boolean
+      arg(:id, non_null(:id))
+      arg(:text, :string)
+      arg(:status, :boolean)
 
-      resolve &NewsResolver.update_task/3
+      resolve(&NewsResolver.update_task/3)
     end
 
     @desc "Delete a task"
     field :delete_task, :task do
-      arg :id, non_null(:id)
+      arg(:id, non_null(:id))
 
-      resolve &NewsResolver.delete_task/3
+      resolve(&NewsResolver.delete_task/3)
     end
   end
 end

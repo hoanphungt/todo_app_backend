@@ -52,10 +52,5 @@ defmodule TodoAppBackend.NewsTest do
       assert {:ok, %Task{}} = News.delete_task(task)
       assert_raise Ecto.NoResultsError, fn -> News.get_task!(task.id) end
     end
-
-    test "change_task/1 returns a task changeset" do
-      task = task_fixture()
-      assert %Ecto.Changeset{} = News.change_task(task)
-    end
   end
 end

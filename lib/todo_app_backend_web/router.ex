@@ -13,5 +13,4 @@ defmodule TodoAppBackendWeb.Router do
       interface: :simple,
       context: %{pubsub: TodoAppBackendWeb.Endpoint}
   end
-
 end

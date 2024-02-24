@@ -2,7 +2,9 @@ defmodule TodoAppBackendWeb.ErrorJSONTest do
   use TodoAppBackendWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert TodoAppBackendWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert TodoAppBackendWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do

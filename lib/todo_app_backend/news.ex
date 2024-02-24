@@ -36,9 +36,12 @@ defmodule TodoAppBackend.News do
   """
   def update_task(%{id: id} = args) do
     case Repo.get(Task, id) do
-      nil -> {:error, "Task not found"}
+      nil ->
+        {:error, "Task not found"}
+
       task ->
-        updated_task = task
+        updated_task =
+          task
           |> Task.changeset(Map.drop(args, [:id]))
           |> Repo.update()
 
@@ -51,17 +54,12 @@ defmodule TodoAppBackend.News do
   """
   def delete_task(%{id: id}) do
     case Repo.get(Task, id) do
-      nil -> {:error, "Task not found"}
+      nil ->
+        {:error, "Task not found"}
+
       task ->
         Repo.delete(task)
         {:ok, task}
     end
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking task changes.
-  """
-  def change_task(%Task{} = task, attrs \\ %{}) do
-    Task.changeset(task, attrs)
   end
 end
