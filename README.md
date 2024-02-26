@@ -20,6 +20,10 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000/graphiql`](http://localhost:4000/graphiql) from your browser to interact with the server.
 
+## Test
+
+- Run `mix test` to run the tests
+
 ## Contribution
 
 This application is developed by [Hoan Phung](https://github.com/hoanphungt)

@@ -32,18 +32,18 @@ defmodule TodoAppBackend.NewsTest do
       assert {:error, %Ecto.Changeset{}} = News.create_task(@invalid_attrs)
     end
 
-    test "update_task/2 with valid data updates the task" do
+    test "update_task/1 with valid data updates the task" do
       task = task_fixture()
-      update_attrs = %{status: false, text: "some updated text"}
+      update_attrs = %{id: task.id, status: false, text: "some updated text"}
 
-      assert {:ok, %Task{} = task} = News.update_task(task, update_attrs)
+      assert {:ok, %Task{} = task} = News.update_task(update_attrs)
       assert task.status == false
       assert task.text == "some updated text"
     end
 
-    test "update_task/2 with invalid data returns error changeset" do
+    test "update_task/1 with invalid data returns error changeset" do
       task = task_fixture()
-      assert {:error, %Ecto.Changeset{}} = News.update_task(task, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = News.update_task(Map.put(@invalid_attrs, :id, task.id))
       assert task == News.get_task!(task.id)
     end
 
